@@ -1,9 +1,8 @@
 const { REST, SlashCommandBuilder, Routes } = require('discord.js');
 const { clientId, guildId, discord_token } = require('./config.json');
 
+//used to creat slash commands
 const commands = [
-	new SlashCommandBuilder().setName('ping').setDescription('Replies with pong!'),
-	new SlashCommandBuilder().setName('server').setDescription('Replies with server info!'),
 	new SlashCommandBuilder().setName('leaderboard').setDescription('Check who are on this month\'s leaderboard podium.'),
     new SlashCommandBuilder().setName('check').setDescription('Check your score on the Monthly Leaderboard.').addStringOption(option => option.setName('name').setDescription('The name to be searched.').setRequired(true)),
 ]

@@ -1,4 +1,3 @@
-const { ModalSubmitFields } = require("discord.js");
 const {google} = require("googleapis");
 
 const auth = new google.auth.GoogleAuth({
@@ -34,6 +33,7 @@ exports.searchName = async function (name) {
     return searchList;
 }
 
+//using the submitted name to find their score
 exports.fetchScore = async function (name) {
     const playerScoreSheet = await sheets.spreadsheets.values.get({
         auth,
@@ -56,6 +56,7 @@ exports.fetchScore = async function (name) {
     return playerScore;
 }
 
+//shows the top 3 players
 exports.leaderboard = async function () {
     const playerScoreSheet = await sheets.spreadsheets.values.get({
         auth,
@@ -69,8 +70,4 @@ exports.leaderboard = async function () {
     const topThree = playerData.slice(0, 3);
 
     return topThree;
-}
-
-exports.test = function () {
-    return console.log("hi");
 }

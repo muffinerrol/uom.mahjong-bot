@@ -21,19 +21,12 @@ client.on('interactionCreate', async interaction => {
 
 	const { commandName } = interaction;
 
-	if (commandName === 'ping') {
-		await interaction.reply('Pong!');
-	} else if (commandName === 'server') {
-		await interaction.reply('Server info.');
-	} else if (commandName === 'user') {
-		await interaction.reply('User info.');
-	}
-
-    //check a player's score
+    //check command
     if (commandName === 'check') {
         const searchTerm = interaction.options.get('name').value;
         const searchResult = await sheetCommands.searchName(searchTerm);
 
+        //no search result
         if (searchResult.length == 0) {
 
             const noresultEmbed = new EmbedBuilder()
@@ -49,6 +42,7 @@ client.on('interactionCreate', async interaction => {
             return;
         }
 
+        //too many search results
         if (searchResult.length > 10) {
 
             const toomanyEmbed = new EmbedBuilder()
@@ -91,6 +85,7 @@ client.on('interactionCreate', async interaction => {
         return;
     }
 
+    //leaderboard command
     if (commandName === 'leaderboard') {
         const topThree = await sheetCommands.leaderboard();
 
@@ -115,7 +110,7 @@ client.on('interactionCreate', async interaction => {
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isSelectMenu()) return;
 	
-    //choosing a player after searching for score
+    //check command: search result selected
     if (interaction.customId === "selectName") {
 
         await interaction.deferUpdate();
