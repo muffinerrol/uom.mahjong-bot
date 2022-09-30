@@ -8,3 +8,6 @@ Please DM me for the credentials.
 Required node modules:
 Discord.js
 GoogleAPIs
+
+Link to the referenced test document:
+https://docs.google.com/spreadsheets/d/1u_MhAjfbpUBZfP9MRPfqTI0_Ux5OCrII4XBtjT5UuAs/edit#gid=383631148 (use the Mahjong Society Google account to access!)
