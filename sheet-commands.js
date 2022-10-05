@@ -8,12 +8,13 @@ const auth = new google.auth.GoogleAuth({
 // create client instance for auth
 const client = auth.getClient();
     
-//create instance of sheets api
+// create instance of sheets api
 const sheets = google.sheets({version: "v4", auth: client});
-    
-const sheetId = "1u_MhAjfbpUBZfP9MRPfqTI0_Ux5OCrII4XBtjT5UuAs";
 
-//provides a filtered result of the name searched
+// Currently linked with "Game sheet_current"
+const sheetId = "1AG0wLJQYYClmUN1bVOb2_j3Gt089joAwNrnSfOe5mAk";
+
+// provides a filtered result of the name searched
 exports.searchName = async function (name) {
     const searchTerm = name.toLowerCase();
     const playerScoreSheet = await sheets.spreadsheets.values.get({
