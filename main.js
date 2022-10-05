@@ -89,17 +89,30 @@ client.on('interactionCreate', async interaction => {
     if (commandName === 'leaderboard') {
         const topThree = await sheetCommands.leaderboard();
 
-        const leaderboardEmbed = new EmbedBuilder()
+        if (topThree.length == 0) {
+            const noDataEmbed = new EmbedBuilder()
+            .setColor('ffcc66')
+            .setTitle('Leaderboard is empty!')
+            .setAuthor({name: interaction.user.tag, iconURL: interaction.user.displayAvatarURL()})
+            .setDescription('There are no data available. Please wait until the scores have been recorded.')
+            .setFooter({text: 'This message will self-destruct in 5 seconds.'});
+
+            await interaction.reply({embeds: [noDataEmbed], fetchReply: true})
+            .then(reply => {setTimeout(() => reply.delete(), 5000)});
+
+            return;
+        };
+
+        let leaderboardEmbed = new EmbedBuilder()
         .setColor('ffcc66')
         .setTitle('Top 3 leaderboard')
         .setAuthor({name: interaction.user.tag, iconURL: interaction.user.displayAvatarURL()})
         .setDescription('Here are the top 3 players in this month\'s leaderboard.')
-        .addFields(
-            { name: `1  ${topThree[0][0]}`, value: `${topThree[0][1]}` },
-            { name: `2  ${topThree[1][0]}`, value: `${topThree[1][1]}` },
-		    { name: `3  ${topThree[2][0]}`, value: `${topThree[2][1]}` },
-        )
         .setFooter({text: 'This message will self-destruct in 5 seconds.'});
+
+        if (topThree.length >= 1) {leaderboardEmbed.addFields({ name: `1  ${topThree[0][0]}`, value: `${topThree[0][1]}` })};
+        if (topThree.length >= 2) {leaderboardEmbed.addFields({ name: `2  ${topThree[1][0]}`, value: `${topThree[1][1]}` })};
+        if (topThree.length >= 3) {leaderboardEmbed.addFields({ name: `3  ${topThree[2][0]}`, value: `${topThree[2][1]}` })};
 
         await interaction.reply({embeds: [leaderboardEmbed], fetchReply: true})
         .then(reply => {setTimeout(() => reply.delete(), 5000)});
