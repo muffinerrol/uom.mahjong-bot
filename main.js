@@ -1,6 +1,6 @@
-const {discord_token} = require('./config.json');
+require('dotenv').config({path:'process.env'});
+// const {discord_token} = require('./config.json');
 const sheetCommands = require("./sheet-commands.js");
-
 
 const { Client, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, SelectMenuBuilder, InteractionResponse } = require('discord.js');
 
@@ -20,6 +20,10 @@ client.on('interactionCreate', async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
+
+    if (interaction.commandName === 'ping') {
+		await interaction.reply('Pong!');
+	}
 
     //check command
     if (commandName === 'check') {
@@ -149,4 +153,4 @@ client.on('interactionCreate', async interaction => {
     }
 });
 
-client.login(discord_token);
+client.login(process.env.discord_token);
