@@ -21,3 +21,15 @@ rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
 rest.put(Routes.applicationCommands(clientId), { body: commands })
 	.then((data) => console.log(`Successfully registered ${data.length} application commands.`))
 	.catch(console.error);
+
+/* deleting global command
+rest.delete(Routes.applicationCommand(clientId, '1027705889102241803'))
+	.then(() => console.log('Successfully deleted application command'))
+	.catch(console.error);
+*/
+
+/* deleting guild command
+rest.delete(Routes.applicationGuildCommand(clientId, guildId, '1027705889102241804'))
+	.then(() => console.log('Successfully deleted guild command'))
+	.catch(console.error);
+*/
