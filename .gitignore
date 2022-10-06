@@ -105,4 +105,3 @@ dist
 
 # creds
 config.json
-process.env

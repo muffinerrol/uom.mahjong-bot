@@ -1,5 +1,5 @@
 require('dotenv').config({path:'process.env'});
-// const {discord_token} = require('./config.json');
+const {discord_token} = require('./config.json');
 const sheetCommands = require("./sheet-commands.js");
 
 const { Client, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, SelectMenuBuilder, InteractionResponse } = require('discord.js');
@@ -153,11 +153,4 @@ client.on('interactionCreate', async interaction => {
     }
 });
 
-var http = require('http');
-http.createServer(function (req, res) {
-    client.login(process.env.discord_token);
-    res.write('Yo!');
-    res.end();
-}).listen(process.env.PORT || 3000);
-
-// client.login(process.env.discord_token);
+client.login(discord_token);

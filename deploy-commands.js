@@ -1,6 +1,6 @@
 require('dotenv').config({path:'process.env'});
 const { REST, SlashCommandBuilder, Routes } = require('discord.js');
-// const { clientId, guildId, discord_token } = require('./config.json');
+const { clientId, guildId, discord_token } = require('./config.json');
 
 //used to creat slash commands
 const commands = [
@@ -10,7 +10,7 @@ const commands = [
 ]
 	.map(command => command.toJSON());
 
-const rest = new REST({ version: '10' }).setToken(process.env.discord_token);
+const rest = new REST({ version: '10' }).setToken(discord_token);
 
 /* publish to test guild
 rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
@@ -18,6 +18,6 @@ rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
 	.catch(console.error);
 */
 
-rest.put(Routes.applicationCommands(process.env.clientId), { body: commands })
+rest.put(Routes.applicationCommands(clientId), { body: commands })
 	.then((data) => console.log(`Successfully registered ${data.length} application commands.`))
 	.catch(console.error);

@@ -1,4 +1,3 @@
-/*
 const {google} = require("googleapis");
 
 const auth = new google.auth.GoogleAuth({
@@ -73,4 +72,3 @@ exports.leaderboard = async function () {
 
     return topThree;
 }
-*/
