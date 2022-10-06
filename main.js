@@ -155,9 +155,9 @@ client.on('interactionCreate', async interaction => {
 
 var http = require('http');
 http.createServer(function (req, res) {
-    console.log(`Just got a request at ${req.url}!`)
+    client.login(process.env.discord_token);
     res.write('Yo!');
     res.end();
 }).listen(process.env.PORT || 3000);
 
-client.login(process.env.discord_token);
+// client.login(process.env.discord_token);
