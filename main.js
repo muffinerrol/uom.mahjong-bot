@@ -4,18 +4,14 @@ const sheetCommands = require("./sheet-commands.js");
 
 const express = require("express");
 const app = express();
+
 const port = process.env.PORT || 3001;
-
-app.get("/", (req, res) => res.type('html').send(html));
-
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
-
 
 const html = `
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hello from Render!</title>
+    <title>uom.mahjong-bot status page</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script>
       setTimeout(() => {
@@ -56,13 +52,13 @@ const html = `
   </head>
   <body>
     <section>
-      Hello from Render!
+      If you are seeing this, then this bot is probably online :)
     </section>
   </body>
 </html>
 `
 
-const { Client, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, SelectMenuBuilder, InteractionResponse } = require('discord.js');
+const { Client, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, SelectMenuBuilder, ActivityType } = require('discord.js');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -73,7 +69,11 @@ const timeoutEmbed = new EmbedBuilder()
 
 //script starts here
 client.once('ready', () => {
-	console.log('Ready!');
+  //required for pings and make Render know the deploy is successful
+  app.get("/", (req, res) => res.type('html').send(html));
+  app.listen(port, () => console.log(`Loaded, now hosted from port ${port}.`));
+
+  client.user.setPresence({ activities: [{ type: ActivityType.Watching, name: 'the monthly leaderboard' }] });
 });
 
 client.on('interactionCreate', async interaction => {
@@ -82,7 +82,10 @@ client.on('interactionCreate', async interaction => {
 	const { commandName } = interaction;
 
     if (interaction.commandName === 'ping') {
-		await interaction.reply('Pong!');
+		await interaction.reply({content: `Pong! The latency is ${Date.now() - interaction.createdTimestamp}ms.`, fetchReply: true})
+    .then(
+      reply => {setTimeout(() => reply.delete(), 3000)}
+    );
 	}
 
     //check command
