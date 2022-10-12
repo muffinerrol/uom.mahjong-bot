@@ -12,7 +12,7 @@ const client = auth.getClient();
 const sheets = google.sheets({version: "v4", auth: client});
 
 //currently linked with "Game sheet_current"
-const sheetId = "1u_MhAjfbpUBZfP9MRPfqTI0_Ux5OCrII4XBtjT5UuAs";
+const sheetId = "1AG0wLJQYYClmUN1bVOb2_j3Gt089joAwNrnSfOe5mAk";
 
 //provides a filtered result of the name searched
 exports.searchName = async function (name) {
