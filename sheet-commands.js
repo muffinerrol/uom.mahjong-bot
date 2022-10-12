@@ -5,16 +5,16 @@ const auth = new google.auth.GoogleAuth({
     scopes: "https://www.googleapis.com/auth/spreadsheets"
 });
     
-// create client instance for auth
+//create client instance for auth
 const client = auth.getClient();
     
-// create instance of sheets api
+//create instance of sheets api
 const sheets = google.sheets({version: "v4", auth: client});
 
-// Currently linked with "Game sheet_current"
-const sheetId = "1AG0wLJQYYClmUN1bVOb2_j3Gt089joAwNrnSfOe5mAk";
+//currently linked with "Game sheet_current"
+const sheetId = "1u_MhAjfbpUBZfP9MRPfqTI0_Ux5OCrII4XBtjT5UuAs";
 
-// provides a filtered result of the name searched
+//provides a filtered result of the name searched
 exports.searchName = async function (name) {
     const searchTerm = name.toLowerCase();
     const playerScoreSheet = await sheets.spreadsheets.values.get({
@@ -72,3 +72,45 @@ exports.leaderboard = async function () {
 
     return topThree;
 }
+
+//provides a filtered result of the name searched, including scoreless ones
+exports.searchNameScoreless = async function (name) {
+    const searchTerm = name.toLowerCase();
+    const playerScoreSheet = await sheets.spreadsheets.values.get({
+        auth,
+        spreadsheetId: sheetId,
+        range: "player!A2:C500"
+    });
+
+    let searchList = [];
+
+    for (const row of playerScoreSheet.data.values) {
+        if (row[0] && row[0].toLowerCase().includes(searchTerm)) {
+            searchList.push([row[0], row[2]]);
+        }
+    };
+
+    return searchList;
+}
+
+//updates the player name in the leaderboard
+exports.updateName = async function (oldName, newName) {
+    const playerScoreSheet = await sheets.spreadsheets.values.get({
+        auth,
+        spreadsheetId: sheetId,
+        range: "player!A2:A500"
+    });
+
+    let rowNumber = playerScoreSheet.data.values.findIndex(player => player[0] == oldName) + 2;
+
+    const response = sheets.spreadsheets.values.update({
+        auth,
+        spreadsheetId: sheetId,
+        range: `player!A${rowNumber}:A${rowNumber}`,
+        valueInputOption: "USER_ENTERED",
+        resource: { values : [[newName]] }
+    });
+
+    return response;
+}
+
