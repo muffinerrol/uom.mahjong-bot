@@ -111,22 +111,7 @@ client.on('interactionCreate', async interaction => {
 });
 
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isSelectMenu()) return;
-
-  const response = interaction.client.responses.get(interaction.customId);
-  if (!response) return;
-
-  try {
-		await response.execute(interaction);
-	} catch (error) {
-		console.error(error);
-		await interaction.reply({ content: 'There was an error while executing this response!', ephemeral: true });
-	}
-
-});
-
-client.on('interactionCreate', async interaction => {
-	if (!interaction.isModalSubmit()) return;
+	if (interaction.isChatInputCommand()) return;
 
   const response = interaction.client.responses.get(interaction.customId);
   if (!response) return;

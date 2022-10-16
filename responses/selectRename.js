@@ -1,4 +1,4 @@
-const { EmbedBuilder, ModalBuilder, TextInputBuilder, ActionRowBuilder, TextInputStyle } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
 module.exports = {
     data: { name : 'selectRename' },
@@ -10,33 +10,21 @@ module.exports = {
 
         const securityEmbed = new EmbedBuilder()
         .setColor('ffcc66')
-        .setTitle(`Renaming ${answer}`)
+        .setTitle(`Form submission`)
         .setAuthor({name: interaction.user.tag, iconURL: interaction.user.displayAvatarURL()})
-        .setDescription('Please complete the following prompt.');
-  
-        const renameModal = new ModalBuilder()
-        .setCustomId('renameModal')
-        .setTitle(`Renaming ${answer}`);
+        .setDescription('Please press the button below to to provide more information.')
+        .setFooter({text: `${answer}`});
 
-        const newNameText = new TextInputBuilder()
-        .setCustomId('newName')
-        .setLabel('What would be your new name?')
-        .setStyle(TextInputStyle.Short)
-        .setMaxLength(100);
+		const formButtonRow = new ActionRowBuilder()
+			.addComponents(
+				new ButtonBuilder()
+					.setCustomId('renameButton')
+					.setLabel('Continue rename')
+					.setStyle(ButtonStyle.Primary)
+			);
 
-        const studentIDText = new TextInputBuilder()
-        .setCustomId('studentID')
-        .setLabel('For security, please enter the student ID.')
-        .setStyle(TextInputStyle.Short)
-        .setMinLength(8)
-        .setMaxLength(8);
-
-        const newNameRow = new ActionRowBuilder().addComponents(newNameText);
-        const studentIDRow = new ActionRowBuilder().addComponents(studentIDText);
-        renameModal.addComponents(newNameRow, studentIDRow);
-
-        await interaction.showModal(renameModal);
-        await interaction.editReply({embeds: [securityEmbed], components: [], ephemeral: true})
+        //await interaction.showModal(renameModal);
+        await interaction.update({embeds: [securityEmbed], components: [formButtonRow], ephemeral: true})
         //.then(reply => {setTimeout(() => reply.delete(), 5000)});   ephemeral messages cannot be deleted by bots
 
     }
