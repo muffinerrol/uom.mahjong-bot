@@ -9,5 +9,4 @@ Required node modules:
 Discord.js
 GoogleAPIs
 
-Link to the referenced test document:
-https://docs.google.com/spreadsheets/d/1u_MhAjfbpUBZfP9MRPfqTI0_Ux5OCrII4XBtjT5UuAs/edit#gid=383631148 (use the Mahjong Society Google account to access!)
+Please rember to switch to the BETA branch before you commit! The main branch is the one that is hosted online, so any changes will be made public immediately!
