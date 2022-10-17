@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
-const sheetCommands = require(require.main.path + '/sheet-commands.js');
+const sheetCommands = require(require.main.path + '/googlesheet.js');
 
 module.exports = {
     data: new SlashCommandBuilder()

@@ -1,6 +1,6 @@
 const { EmbedBuilder, ModalBuilder, TextInputBuilder, ActionRowBuilder, TextInputStyle } = require('discord.js');
 
-const sheetCommands = require(require.main.path + '/sheet-commands.js');
+const sheetCommands = require(require.main.path + '/googlesheet.js');
 
 module.exports = {
     data: { name : 'renameModal' },
