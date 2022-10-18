@@ -12,13 +12,13 @@ module.exports = {
         .setColor('ffcc66')
         .setTitle(`Form submission`)
         .setAuthor({name: interaction.user.tag, iconURL: interaction.user.displayAvatarURL()})
-        .setDescription('Please press the button below to to provide more information.')
+        .setDescription('Please press the button below to provide more information.')
         .setFooter({text: `${answer}`});
 
 		const formButtonRow = new ActionRowBuilder()
 			.addComponents(
 				new ButtonBuilder()
-					.setCustomId('renameButton')
+					.setCustomId('renameProceedButton')
 					.setLabel('Continue rename')
 					.setStyle(ButtonStyle.Primary)
 			);
