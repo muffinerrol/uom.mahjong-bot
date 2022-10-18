@@ -1,14 +1,20 @@
 require('dotenv').config({path:'process.env'});
-const { REST, SlashCommandBuilder, Routes } = require('discord.js');
+
+const fs = require('node:fs');
+const path = require('node:path');
+
+const { REST, Routes } = require('discord.js');
 const { clientId, guildId, discord_token } = require('./config.json');
 
-//used to creat slash commands
-const commands = [
-	new SlashCommandBuilder().setName('ping').setDescription('Pong.'),
-	new SlashCommandBuilder().setName('leaderboard').setDescription('Check who are on this month\'s leaderboard podium.'),
-    new SlashCommandBuilder().setName('check').setDescription('Check your score on the Monthly Leaderboard.').addStringOption(option => option.setName('name').setDescription('The name to be searched.').setRequired(true)),
-]
-	.map(command => command.toJSON());
+const commands = [];
+const commandsPath = path.join(__dirname, 'commands');
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+	const filePath = path.join(commandsPath, file);
+	const command = require(filePath);
+	commands.push(command.data.toJSON());
+}
 
 const rest = new REST({ version: '10' }).setToken(discord_token);
 
@@ -18,12 +24,14 @@ rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
 	.catch(console.error);
 */
 
+
 rest.put(Routes.applicationCommands(clientId), { body: commands })
 	.then((data) => console.log(`Successfully registered ${data.length} application commands.`))
 	.catch(console.error);
 
-/* deleting global command
-rest.delete(Routes.applicationCommand(clientId, '1027705889102241803'))
+
+/*
+rest.delete(Routes.applicationCommand(clientId, '1028779162091147364'))
 	.then(() => console.log('Successfully deleted application command'))
 	.catch(console.error);
 */
