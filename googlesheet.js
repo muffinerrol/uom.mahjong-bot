@@ -102,7 +102,7 @@ exports.updateName = async function (oldName, newName) {
     });
 
     let rowNumber = playerScoreSheet.data.values.findIndex(player => player[0] == oldName) + 2;
-    if (rowNumber < 3) {
+    if (rowNumber < 2) {
         return "findError";
     }
 
