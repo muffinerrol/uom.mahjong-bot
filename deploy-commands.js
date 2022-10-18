@@ -2,6 +2,10 @@ require('dotenv').config({path:'process.env'});
 
 const fs = require('node:fs');
 const path = require('node:path');
+const readline = require('node:readline').createInterface({
+	input: process.stdin,
+	output: process.stdout
+});
 
 const { REST, Routes } = require('discord.js');
 const { clientId, guildId, discord_token } = require('./config.json');
@@ -24,20 +28,27 @@ rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
 	.catch(console.error);
 */
 
+readline.question("Is it register, or is it delete? (register/ delete)\n>", async command => {
+	if (command == "register") {
+	
+		await rest.put(Routes.applicationCommands(clientId), { body: commands })
+			.then((data) => console.log(`Successfully registered ${data.length} application commands.`))
+			.catch(console.error);
+		process.exit();
+			
+	} else if (command == "delete") {
+	
+		readline.question("What will be the command ID?\n>", async id => {
+			await rest.delete(Routes.applicationCommand(clientId, id))
+				.then(() => console.log('Successfully deleted application command'))
+				.catch(console.error);
+			process.exit();
+		})
 
-rest.put(Routes.applicationCommands(clientId), { body: commands })
-	.then((data) => console.log(`Successfully registered ${data.length} application commands.`))
-	.catch(console.error);
-
-
-/*
-rest.delete(Routes.applicationCommand(clientId, '1028779162091147364'))
-	.then(() => console.log('Successfully deleted application command'))
-	.catch(console.error);
-*/
-
-/* deleting guild command
-rest.delete(Routes.applicationGuildCommand(clientId, guildId, '1027705889102241804'))
-	.then(() => console.log('Successfully deleted guild command'))
-	.catch(console.error);
-*/
+	} else {
+	
+		console.log("Command unknown! Please make sure it's either \"register\" or \"delete\".");
+		process.exit();
+	
+	}
+})
