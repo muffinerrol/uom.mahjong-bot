@@ -8,8 +8,8 @@ module.exports = {
 
         const answer = interaction.message.embeds[0].footer.text;
   
-        const renameModal = new ModalBuilder()
-        .setCustomId('renameModal')
+        const renameIdModal = new ModalBuilder()
+        .setCustomId('renameIdModal')
         .setTitle(`Renaming ${answer}`);
 
         const newNameText = new TextInputBuilder()
@@ -27,9 +27,9 @@ module.exports = {
 
         const newNameRow = new ActionRowBuilder().addComponents(newNameText);
         const studentIDRow = new ActionRowBuilder().addComponents(studentIDText);
-        renameModal.addComponents(newNameRow, studentIDRow);     
+        renameIdModal.addComponents(newNameRow, studentIDRow);     
 
-        await interaction.showModal(renameModal);
+        await interaction.showModal(renameIdModal);
 
     }
 }

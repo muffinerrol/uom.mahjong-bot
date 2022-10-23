@@ -25,6 +25,7 @@ module.exports = {
         .setFooter({text: 'Please write down this value for safekeeping;\nthe score shown is for this month\'s leaderboard only.'});
 
         interaction.editReply({embeds: [scoreEmbed], components: [], ephemeral: true})
+        console.log(`Check: score of ${answer} accessed`)
         //.then(reply => {setTimeout(() => reply.delete(), 5000)});   ephemeral messages cannot be deleted by bots
         
     }
