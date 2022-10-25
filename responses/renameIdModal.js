@@ -7,8 +7,7 @@ module.exports = {
     async execute(interaction) {
 
         //command starts here
-
-        await interaction.deferReply();
+        await interaction.deferUpdate();
 
         const studentID = interaction.fields.getTextInputValue('studentID');
         const newName = interaction.fields.getTextInputValue('newName').trim();

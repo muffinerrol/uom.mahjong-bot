@@ -7,7 +7,7 @@ module.exports = {
     async execute(interaction) {
 
         //command starts here
-        await interaction.deferReply();
+        await interaction.deferUpdate();
 
         const answer = interaction.values.toString();
         console.log(`Check: score of ${answer} accessed`)
