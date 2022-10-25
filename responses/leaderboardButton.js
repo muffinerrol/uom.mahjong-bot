@@ -7,6 +7,7 @@ module.exports = {
     async execute(interaction) {
 
         //command starts here
+        await interaction.deferReply();
   
         const topThree = await sheetCommands.leaderboard();
 
@@ -37,7 +38,7 @@ module.exports = {
 
         console.log('Leaderboard: leaderboard accessed')
 
-        await interaction.reply({embeds: [leaderboardEmbed], fetchReply: true})
+        await interaction.editReply({embeds: [leaderboardEmbed], fetchReply: true})
         .then(reply => {setTimeout(() => reply.delete(), 10000)});
         return;
 

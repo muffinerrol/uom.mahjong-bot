@@ -7,8 +7,7 @@ module.exports = {
     async execute(interaction) {
 
         //command starts here
-
-        await interaction.deferUpdate();
+        await interaction.deferReply();
 
         const answer = interaction.values.toString();
 
