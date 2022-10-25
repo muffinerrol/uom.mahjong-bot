@@ -9,8 +9,8 @@ module.exports = {
         //command starts here
         await interaction.deferUpdate();
 
-        const answer = interaction.values.toString();
-        console.log(`Check: score of ${answer} accessed`)
+        const answer = await interaction.values.toString();
+        //console.log(`Check: score of ${answer} accessed`)
 
         const playerScore = await sheetCommands.fetchScore(answer);
 
