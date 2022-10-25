@@ -9,6 +9,7 @@ module.exports = {
     async execute(interaction) {
 
         //command starts here
+        await interaction.deferReply();
 
         const topThree = await sheetCommands.leaderboard();
 
@@ -37,7 +38,7 @@ module.exports = {
         if (topThree.length >= 2) {leaderboardEmbed.addFields({ name: `2  ${topThree[1][0]}`, value: `${topThree[1][1]}` })};
         if (topThree.length >= 3) {leaderboardEmbed.addFields({ name: `3  ${topThree[2][0]}`, value: `${topThree[2][1]}` })};
 
-        await interaction.reply({embeds: [leaderboardEmbed], fetchReply: true})
+        await interaction.editReply({embeds: [leaderboardEmbed], fetchReply: true})
         .then(reply => {setTimeout(() => reply.delete(), 5000)});
         return;
 
