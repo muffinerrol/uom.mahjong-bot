@@ -10,9 +10,9 @@ module.exports = {
         await interaction.deferUpdate();
 
         const answer = await interaction.values.toString();
-        //console.log(`Check: score of ${answer} accessed`)
 
         const playerScore = await sheetCommands.fetchScore(answer);
+        console.log(`Check: score of ${answer} accessed`)
 
         const scoreEmbed = new EmbedBuilder()
         .setColor('33cc33')
