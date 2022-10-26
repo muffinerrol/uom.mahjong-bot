@@ -57,6 +57,8 @@ client.on('interactionCreate', async interaction => {
 	} catch (error) {
 		if (error.code == 10062) {
       console.log('DiscordAPIError[10062]: Unknown interaction');
+    } else if (error.code == 40060) {
+      console.log('DiscordAPIError[40060]: Interaction has already been acknowledged.');
     } else {
       console.log(error)
     };
@@ -75,6 +77,8 @@ client.on('interactionCreate', async interaction => {
 	} catch (error) {
 		if (error.code == 10062) {
       console.log('DiscordAPIError[10062]: Unknown interaction');
+    } else if (error.code == 40060) {
+      console.log('DiscordAPIError[40060]: Interaction has already been acknowledged.');
     } else {
       console.log(error)
     };
