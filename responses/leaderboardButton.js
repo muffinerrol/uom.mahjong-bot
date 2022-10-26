@@ -7,10 +7,15 @@ module.exports = {
     async execute(interaction) {
 
         //command starts here
-        await interaction.deferReply({fetchReply: true});
+        await interaction.deferReply();
   
         const topThree = await sheetCommands.leaderboard();
 
+        await interaction.editReply(topThree)
+        .then(reply => {setTimeout(() => reply.delete(), 10000)});
+        return;
+
+        /*
         if (topThree.length == 0) {
             const noDataEmbed = new EmbedBuilder()
             .setColor('ff0000')
@@ -41,6 +46,6 @@ module.exports = {
         await interaction.editReply({embeds: [leaderboardEmbed], fetchReply: true})
         .then(reply => {setTimeout(() => reply.delete(), 10000)});
         return;
-
+        */
     }
 }
