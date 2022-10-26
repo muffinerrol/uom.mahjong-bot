@@ -7,16 +7,11 @@ module.exports = {
     async execute(interaction) {
 
         //command starts here
-        await interaction.deferReply();
+        //await interaction.deferReply();
   
         const topThree = await sheetCommands.leaderboard();
-        console.log(topThree);
 
-        await interaction.editReply('This is a test message.')
-        .then(reply => {setTimeout(() => reply.delete(), 10000)});
-        return;
-
-        /*
+        
         if (topThree.length == 0) {
             const noDataEmbed = new EmbedBuilder()
             .setColor('ff0000')
@@ -25,7 +20,7 @@ module.exports = {
             .setDescription('There are no data available. Please wait until the scores have been recorded.')
             .setFooter({text: 'This message will self-destruct in 5 seconds.'});
 
-            await interaction.editReply({embeds: [noDataEmbed], fetchReply: true})
+            await interaction.Reply({embeds: [noDataEmbed], fetchReply: true})
             .then(reply => {setTimeout(() => reply.delete(), 5000)});
 
             return;
@@ -44,9 +39,9 @@ module.exports = {
 
         console.log('Leaderboard: leaderboard accessed')
 
-        await interaction.editReply({embeds: [leaderboardEmbed], fetchReply: true})
+        await interaction.Reply({embeds: [leaderboardEmbed], fetchReply: true})
         .then(reply => {setTimeout(() => reply.delete(), 10000)});
         return;
-        */
+        
     }
 }
