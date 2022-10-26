@@ -7,7 +7,7 @@ module.exports = {
     async execute(interaction) {
 
         //command starts here
-        await interaction.deferReply();
+        await interaction.deferReply({fetchReply: true});
   
         const topThree = await sheetCommands.leaderboard();
 
