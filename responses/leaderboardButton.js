@@ -11,7 +11,7 @@ module.exports = {
   
         const topThree = await sheetCommands.leaderboard();
 
-        await interaction.editReply(topThree)
+        await interaction.editReply(topThree.toString())
         .then(reply => {setTimeout(() => reply.delete(), 10000)});
         return;
 
