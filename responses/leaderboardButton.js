@@ -7,7 +7,7 @@ module.exports = {
     async execute(interaction) {
 
         //command starts here
-        //await interaction.deferReply();
+        await interaction.deferReply();
   
         const topThree = await sheetCommands.leaderboard();
 
@@ -20,7 +20,7 @@ module.exports = {
             .setDescription('There are no data available. Please wait until the scores have been recorded.')
             .setFooter({text: 'This message will self-destruct in 5 seconds.'});
 
-            await interaction.reply({embeds: [noDataEmbed], fetchReply: true})
+            await interaction.editReply({embeds: [noDataEmbed], fetchReply: true})
             .then(reply => {setTimeout(() => reply.delete(), 5000)});
 
             return;
@@ -39,7 +39,7 @@ module.exports = {
 
         console.log('Leaderboard: leaderboard accessed')
 
-        await interaction.reply({embeds: [leaderboardEmbed], fetchReply: true})
+        await interaction.editReply({embeds: [leaderboardEmbed], fetchReply: true})
         .then(reply => {setTimeout(() => reply.delete(), 10000)});
         return;
         

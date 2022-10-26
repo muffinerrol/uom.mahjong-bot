@@ -55,8 +55,11 @@ client.on('interactionCreate', async interaction => {
   try {
 		await command.execute(interaction);
 	} catch (error) {
-		//console.error(error);
-		
+		if (error.code == 10062) {
+      console.log('DiscordAPIError[10062]: Unknown interaction');
+    } else {
+      console.log(error)
+    };
 	}
 
 });
@@ -70,8 +73,11 @@ client.on('interactionCreate', async interaction => {
   try {
 		await response.execute(interaction);
 	} catch (error) {
-		console.error(error);
-		
+		if (error.code == 10062) {
+      console.log('DiscordAPIError[10062]: Unknown interaction');
+    } else {
+      console.log(error)
+    };
 	}
 
 });
