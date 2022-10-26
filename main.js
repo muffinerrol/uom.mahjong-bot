@@ -55,7 +55,7 @@ client.on('interactionCreate', async interaction => {
   try {
 		await command.execute(interaction);
 	} catch (error) {
-		console.error(error);
+		//console.error(error);
 		
 	}
 
@@ -74,6 +74,10 @@ client.on('interactionCreate', async interaction => {
 		
 	}
 
+});
+
+process.on('unhandledRejection', error => {
+	console.error('Unhandled promise rejection:', error);
 });
 
 client.login(discord_token);
