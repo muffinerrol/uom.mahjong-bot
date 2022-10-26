@@ -10,8 +10,9 @@ module.exports = {
         await interaction.deferReply();
   
         const topThree = await sheetCommands.leaderboard();
+        console.log(topThree);
 
-        await interaction.editReply(topThree.toString())
+        await interaction.editReply('This is a test message.')
         .then(reply => {setTimeout(() => reply.delete(), 10000)});
         return;
 
