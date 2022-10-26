@@ -47,37 +47,20 @@ client.once('ready', () => {
 });
 
 client.on('interactionCreate', async interaction => {
-	if (interaction.isChatInputCommand()) {
-    
-    const command = interaction.client.commands.get(interaction.commandName);
-    if (!command) return;
-  
-    try {
-      await command.execute(interaction);
-    } catch (error) {
-      console.error(error);
-      await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
-    }
+	if (!interaction.isChatInputCommand()) return;
 
-  } else if (interaction.isSelectMenu() || interaction.isButton() || interaction.isModalSubmit()) {
+	const command = interaction.client.commands.get(interaction.commandName);
+  if (!command) return;
 
-    if (interaction.isChatInputCommand()) return;
-
-    const response = interaction.client.responses.get(interaction.customId);
-    if (!response) return;
-  
-    try {
-      await response.execute(interaction);
-    } catch (error) {
-      console.error(error);
-      await interaction.reply({ content: 'There was an error while executing this response!', ephemeral: true });
-    }
-
-  }
+  try {
+		await command.execute(interaction);
+	} catch (error) {
+		console.error(error);
+		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+	}
 
 });
 
-/*
 client.on('interactionCreate', async interaction => {
 	if (interaction.isChatInputCommand()) return;
 
@@ -92,6 +75,5 @@ client.on('interactionCreate', async interaction => {
 	}
 
 });
-*/
 
 client.login(discord_token);
