@@ -19,7 +19,7 @@ module.exports = {
             .setDescription('There are no data available. Please wait until the scores have been recorded.')
             .setFooter({text: 'This message will self-destruct in 5 seconds.'});
 
-            await interaction.reply({embeds: [noDataEmbed], fetchReply: true})
+            await interaction.editReply({embeds: [noDataEmbed], fetchReply: true})
             .then(reply => {setTimeout(() => reply.delete(), 5000)});
 
             return;

@@ -12,6 +12,7 @@ module.exports = {
         const answer = await interaction.values.toString();
 
         const playerScore = await sheetCommands.fetchScore(answer);
+        //console.log(`Check: score of ${answer} accessed`)
 
         const scoreEmbed = new EmbedBuilder()
         .setColor('33cc33')
