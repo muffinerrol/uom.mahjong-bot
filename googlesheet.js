@@ -44,16 +44,24 @@ exports.fetchScore = async function (name) {
 
     const playerData = playerScoreSheet.data.values.filter(item => item[1]);
     playerData.sort((a, b) => parseInt(b[1]) - parseInt(a[1]));
+    console.log(playerData);
 
-    let playerScore = ['', 0, playerData.length];
+    let playerScore = ['', 1, playerData.length];
 
-    for (const row of playerData) {
-        playerScore[1]++;
-        if (row[1] && row[0].includes(name)) {
-            playerScore[0] = row[1];
+    for (let i = 0; i < playerData.length; i++) {
+
+        //competitive ranking (1224)
+        if (i != 0) {
+            console.log(i + " " + playerScore[1]);
+            playerScore[1] = playerData[i][1] == playerData[i - 1][1] ? playerScore[1] : i + 1;
+        };
+
+        if (playerData[i][1] && playerData[i][0].includes(name)) {
+            playerScore[0] = playerData[i][1];
             break;
         }
     };
+    
     return playerScore;
 }
 
@@ -69,6 +77,7 @@ exports.leaderboard = async function () {
     playerData.sort((a, b) => parseInt(b[1]) - parseInt(a[1]));
 
     const topThree = playerData.slice(0, 3);
+    //const topTen = playerData.slice(0, 10).forEach(item => item.push(1));
 
     return topThree;
 }
