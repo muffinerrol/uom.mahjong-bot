@@ -1,5 +1,6 @@
 const {google} = require("googleapis");
 
+/*
 const auth = new google.auth.GoogleAuth({
     keyFile: "config.json",
     scopes: "https://www.googleapis.com/auth/spreadsheets"
@@ -126,3 +127,4 @@ exports.updateName = async function (oldName, newName) {
     return response;
 }
 
+*/
