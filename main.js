@@ -46,6 +46,7 @@ client.once('ready', () => {
   client.user.setPresence({ activities: [{ type: ActivityType.Watching, name: 'the monthly leaderboard' }] });
 });
 
+/*
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
@@ -85,5 +86,6 @@ client.on('interactionCreate', async interaction => {
 	}
 
 });
+*/
 
 client.login(discord_token);
